@@ -17,6 +17,7 @@ set(PACKAGE_BUGREPORT "chocolate-doom-dev-list@chocolate-doom.org")
 string(REGEX REPLACE " Doom$" "" PACKAGE_SHORTNAME "${PACKAGE_NAME}")
 set(PACKAGE_COPYRIGHT "Copyright (C) 1993-2017")
 set(PACKAGE_LICENSE "GNU General Public License, version 2")
+set(PROGRAM_PREFIX choco-)
 
 # Any settings that should apply to all targets in this directory and all
 # subdirectories should go here.  Use judiciously.

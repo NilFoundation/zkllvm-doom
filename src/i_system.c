@@ -15,7 +15,6 @@
 // DESCRIPTION:
 //
 
-#include <emscripten/emscripten.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -236,8 +235,7 @@ void I_Quit(void)
 
     SDL_Quit();
 
-    emscripten_cancel_main_loop();
-    emscripten_force_exit(0);
+    exit(0);
 }
 
 //
@@ -419,4 +417,3 @@ boolean I_GetMemoryValue(unsigned int offset, void *value, int size)
 
     return false;
 }
-

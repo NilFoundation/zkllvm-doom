@@ -25,9 +25,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <emscripten.h>
-#include <emscripten/html5.h>
-
 #include "config.h"
 #include "debug.h"
 #include "deh_main.h"
@@ -424,13 +421,6 @@ void D_DoomLoop(void)
     }
 
     if (demorecording) G_BeginRecording();
-
-    // this needs to be started before video initialization otherwise emscriptem will complaint with
-    // "emscripten_set_main_loop_timing: Cannot set timing mode for main loop since a main loop does not exist!"
-    // see https://emscripten.org/docs/api_reference/emscripten.h.html#c.emscripten_set_main_loop
-    // and https://tristanpenman.com/blog/posts/2018/01/08/porting-an-asteroids-clone-to-javascript/#main-loop
-    printf("Running emscripten_set_main_loop()\n");
-    emscripten_set_main_loop(D_RunFrame, 0, 0);
 
     main_loop_started = true;
 
@@ -1706,4 +1696,3 @@ void D_DoomMain(void)
 
     D_DoomLoop(); // never returns
 }
-

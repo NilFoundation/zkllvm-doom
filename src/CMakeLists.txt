@@ -40,7 +40,6 @@ set(GAME_SOURCE_FILES
     i_glob.c            i_glob.h
     i_input.c           i_input.h
     i_joystick.c        i_joystick.h
-                        i_swap.h
     i_midipipe.c        i_midipipe.h
     i_timer.c           i_timer.h
     midifile.c          midifile.h

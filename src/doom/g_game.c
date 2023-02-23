@@ -15,7 +15,6 @@
 // DESCRIPTION:  none
 //
 
-#include <emscripten/websocket.h>
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,10 +28,8 @@
 
 #include "f_finale.h"
 #include "i_input.h"
-#include "i_swap.h"
 #include "i_system.h"
 #include "i_timer.h"
-#include "i_video.h"
 #include "m_argv.h"
 #include "m_controls.h"
 #include "m_menu.h"
@@ -52,18 +49,14 @@
 #include "statdump.h"
 #include "wi_stuff.h"
 
-// Needs access to LFB.
-#include "v_video.h"
 
 #include "w_wad.h"
 
 #include "p_local.h"
 
-#include "s_sound.h"
 
 // Data.
 #include "dstrings.h"
-#include "sounds.h"
 
 // SKY handling - still the wrong place.
 #include "r_data.h"
@@ -370,17 +363,6 @@ void G_BuildTiccmd(ticcmd_t *cmd, int maketic)
         side += sidemove[speed];
     }
 
-    // fullscreen
-    if (gamekeydown[key_fullscreen]) {
-        EmscriptenFullscreenChangeEvent fsce;
-        emscripten_get_fullscreen_status(&fsce);
-        if (!fsce.isFullscreen) {
-            printf("doom: 11, entering fullscreen");
-            emscripten_request_fullscreen("#canvas", 1);
-            emscripten_sleep(1000);
-        }
-    }
-
     // buttons
     cmd->chatchar = HU_dequeueChatChar();
 
@@ -662,11 +644,11 @@ boolean G_Responder(event_t *ev)
     }
 
     if (gamestate == GS_LEVEL) {
-#if 0 
-	if (devparm && ev->type == ev_keydown && ev->data1 == ';') 
-	{ 
-	    G_DeathMatchSpawnPlayer (0); 
-	    return true; 
+#if 0
+	if (devparm && ev->type == ev_keydown && ev->data1 == ';')
+	{
+	    G_DeathMatchSpawnPlayer (0);
+	    return true;
 	}
 #endif
         if (HU_Responder(ev)) return true; // chat ate the event
@@ -2058,4 +2040,3 @@ boolean G_CheckDemoStatus(void)
 
     return false;
 }
-

@@ -17,10 +17,10 @@
 //
 
 #include "SDL.h"
-#include <emscripten.h>
 
 #include "i_timer.h"
 #include "doomtype.h"
+#include <unistd.h>
 
 //
 // I_GetTime
@@ -40,7 +40,7 @@ int  I_GetTime (void)
 
     ticks -= basetime;
 
-    return (ticks * TICRATE) / 1000;    
+    return (ticks * TICRATE) / 1000;
 }
 
 //
@@ -64,7 +64,7 @@ int I_GetTimeMS(void)
 void I_Sleep(int ms)
 {
     // SDL_Delay(ms);
-    emscripten_sleep(ms);
+    usleep(ms);
 }
 
 void I_WaitVBL(int count)
@@ -81,4 +81,3 @@ void I_InitTimer(void)
 
     SDL_Init(SDL_INIT_TIMER);
 }
-
