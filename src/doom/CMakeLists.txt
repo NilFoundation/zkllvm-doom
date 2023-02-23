@@ -13,7 +13,6 @@ add_library(doom STATIC
                             d_englsh.h
             d_items.c       d_items.h
             d_main.c        d_main.h
-            d_net.c
                             doomdata.h
             doomdef.c       doomdef.h
             doomstat.c      doomstat.h
@@ -61,7 +60,6 @@ add_library(doom STATIC
                             r_state.h
             r_things.c      r_things.h
             s_sound.c       s_sound.h
-            sounds.c        sounds.h
             statdump.c      statdump.h
             st_lib.c        st_lib.h
             st_stuff.c      st_stuff.h
