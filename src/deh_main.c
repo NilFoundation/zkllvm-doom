@@ -52,24 +52,6 @@ boolean deh_allow_long_cheats = false;
 
 boolean deh_apply_cheats = true;
 
-void DEH_Checksum(sha1_digest_t digest)
-{
-    sha1_context_t sha1_context;
-    unsigned int i;
-
-    SHA1_Init(&sha1_context);
-
-    for (i=0; deh_section_types[i] != NULL; ++i)
-    {
-        if (deh_section_types[i]->sha1_hash != NULL)
-        {
-            deh_section_types[i]->sha1_hash(&sha1_context);
-        }
-    }
-
-    SHA1_Final(digest, &sha1_context);
-}
-
 // Called on startup to call the Init functions
 
 static void InitializeSections(void)
@@ -93,7 +75,7 @@ static void DEH_Init(void)
     // Ignore cheats in dehacked files.
     //
 
-    if (M_CheckParm("-nocheats") > 0) 
+    if (M_CheckParm("-nocheats") > 0)
     {
 	deh_apply_cheats = false;
     }
@@ -154,7 +136,7 @@ static char *CleanString(char *s)
         ++s;
 
     // Trailing whitespace
-   
+
     strending = s + strlen(s) - 1;
 
     while (strlen(s) > 0 && isspace(*strending))
@@ -166,7 +148,7 @@ static char *CleanString(char *s)
     return s;
 }
 
-// This pattern is used a lot of times in different sections, 
+// This pattern is used a lot of times in different sections,
 // an assignment is essentially just a statement of the form:
 //
 // Variable Name = Value
@@ -181,7 +163,7 @@ boolean DEH_ParseAssignment(char *line, char **variable_name, char **value)
     char *p;
 
     // find the equals
-    
+
     p = strchr(line, '=');
 
     if (p == NULL)
@@ -194,11 +176,11 @@ boolean DEH_ParseAssignment(char *line, char **variable_name, char **value)
 
     *p = '\0';
     *variable_name = CleanString(line);
-    
+
     // value immediately follows the '='
-    
+
     *value = CleanString(p+1);
-    
+
     return true;
 }
 
@@ -206,7 +188,7 @@ static boolean CheckSignatures(deh_context_t *context)
 {
     size_t i;
     char *line;
-    
+
     // Read the first line
 
     line = DEH_ReadLine(context, false);
@@ -247,7 +229,7 @@ static void DEH_ParseComment(char *comment)
 
     // Allow comments containing this special value to allow string
     // replacements longer than those permitted by DOS dehacked.
-    // This allows us to use a dehacked patch for doing string 
+    // This allows us to use a dehacked patch for doing string
     // replacements for emulating Chex Quest.
     //
     // If you use this, your dehacked patch may not work in Vanilla
@@ -512,4 +494,3 @@ void DEH_ParseCommandLine(void)
         }
     }
 }
-

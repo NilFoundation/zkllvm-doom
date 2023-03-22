@@ -14,7 +14,7 @@
 //
 // DESCRIPTION:
 //   Duh.
-// 
+//
 
 
 #ifndef __G_GAME__
@@ -43,11 +43,6 @@ void G_DeferedPlayDemo (const char* demo);
 // calls P_SetupLevel or W_EnterWorld.
 void G_LoadGame (char* name);
 
-void G_DoLoadGame (void);
-
-// Called by M_Responder.
-void G_SaveGame (int slot, char* description);
-
 // Only called by startup code.
 void G_RecordDemo (const char* name);
 
@@ -64,7 +59,7 @@ void G_WorldDone (void);
 
 // Read current data from inputs and build a player movement command.
 
-void G_BuildTiccmd (ticcmd_t *cmd, int maketic); 
+void G_BuildTiccmd (ticcmd_t *cmd, int maketic);
 
 void G_Ticker (void);
 boolean G_Responder (event_t*	ev);
@@ -77,4 +72,3 @@ int G_VanillaVersionCode(void);
 extern int vanilla_savegame_limit;
 extern int vanilla_demo_limit;
 #endif
-
